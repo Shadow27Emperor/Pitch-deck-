@@ -17,12 +17,16 @@
         /* Scroll Animations */
         .fade-in-up { animation: fadeInUp 1s ease-out forwards; opacity: 0; }
         .delay-1 { animation-delay: 0.2s; }
-        .delay-2 { animation-delay: 0.4s; }
         
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        @keyframes quickFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .animate-quick-fade { animation: quickFade 0.3s ease-out forwards; }
     </style>
 </head>
 <body class="overflow-x-hidden bg-black">
@@ -147,7 +151,8 @@
     <section id="rings-section" class="py-16 md:py-24 px-4 md:px-6 border-t border-zinc-900 bg-black">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center min-h-[400px]">
             
-            <div id="svg-trigger" class="relative flex justify-center items-center w-full max-w-[400px] mx-auto aspect-square cursor-pointer transition-all duration-500 ease-in-out group">
+            <button type="button" id="svg-trigger" onclick="toggleBudget()" class="w-full max-w-[400px] mx-auto aspect-square relative appearance-none focus:outline-none bg-transparent border-none p-0 cursor-pointer transition-all duration-500 ease-in-out">
+                
                 <svg viewBox="0 0 400 400" class="w-full h-auto">
                     <g transform="rotate(-90 200 200)">
                         <circle cx="200" cy="200" r="160" fill="none" stroke="#18181b" stroke-width="3"></circle>
@@ -163,16 +168,17 @@
                         <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="40" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" data-percentage="10" stroke-dasharray="251.3" stroke-dashoffset="251.3"></circle>
                     </g>
                 </svg>
+                
                 <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                     <span id="data-map-text" class="font-mono text-[10px] md:text-xs text-zinc-600 opacity-0 transition-opacity duration-1000 tracking-widest">DATA MAP</span>
-                    <span id="tap-text" class="font-mono text-[9px] md:text-[10px] text-zinc-700 mt-2 opacity-0 transition-opacity duration-1000 delay-500 group-hover:text-white border border-zinc-800 px-3 py-1 rounded-full">[ TAP RINGS ]</span>
+                    <span id="tap-text" class="font-mono text-[9px] md:text-[10px] text-zinc-500 mt-2 opacity-0 transition-opacity duration-1000 delay-500 border border-zinc-800 px-3 py-1 rounded-full">[ TAP TO REVEAL ]</span>
                 </div>
-            </div>
+            </button>
 
             <div class="relative w-full">
                 <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center md:text-left">Market Sizing & The Ask</h2>
                 
-                <div id="data-map-container" class="space-y-4 mb-10 md:mb-12 font-mono text-xs md:text-sm transition-all duration-300 opacity-100">
+                <div id="data-map-container" class="space-y-4 mb-10 md:mb-12 font-mono text-xs md:text-sm animate-quick-fade" style="display: block;">
                     <div class="flex items-center gap-3 md:gap-4">
                         <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#60a5fa] shrink-0"></div>
                         <span class="text-zinc-500 w-24 md:w-32 shrink-0">Global TAM:</span>
@@ -197,9 +203,9 @@
                     </div>
                 </div>
 
-                <div id="budget-container" class="hidden opacity-0 transition-opacity duration-300">
+                <div id="budget-container" class="animate-quick-fade" style="display: none;">
                     <div class="bg-black border border-zinc-800 rounded-lg p-6 md:p-8 relative">
-                        <button id="close-budget-btn" class="absolute top-4 right-4 text-zinc-600 hover:text-white font-mono text-xs">[ X ]</button>
+                        <button onclick="toggleBudget()" class="absolute top-4 right-4 text-zinc-600 hover:text-white font-mono text-xs">[ X ]</button>
                         <h3 class="text-lg md:text-xl font-bold text-white mb-4 md:mb-6 border-b border-zinc-900 pb-3 md:pb-4 pr-16">Raising a $25,000 Micro-Seed</h3>
                         
                         <div class="space-y-5 md:space-y-6">
@@ -254,6 +260,7 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             // 1. Scroll Observer for SVG Sweep Animation
+            // Lowered threshold to 0.1 so it fires instantly even on small mobile screens
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -273,63 +280,39 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.5 });
+            }, { threshold: 0.1 }); 
 
             const ringsSection = document.getElementById('rings-section');
             if (ringsSection) observer.observe(ringsSection);
-
-            // 2. Mobile-safe click listener for the Tap Interaction
-            let isBudgetVisible = false;
-            const svgTrigger = document.getElementById('svg-trigger');
-            const closeBtn = document.getElementById('close-budget-btn');
-            
-            function toggleBudget(e) {
-                if(e) e.stopPropagation(); 
-                isBudgetVisible = !isBudgetVisible;
-
-                const svgContainer = document.getElementById('svg-trigger');
-                const dataMap = document.getElementById('data-map-container');
-                const budgetBox = document.getElementById('budget-container');
-                const tapText = document.getElementById('tap-text');
-
-                if (isBudgetVisible) {
-                    // Dim rings and change prompt text
-                    svgContainer.classList.add('opacity-30', 'scale-95');
-                    tapText.innerText = "[ CLOSE ]";
-
-                    // Hide TAM/SAM list immediately
-                    dataMap.classList.add('hidden');
-                    dataMap.classList.remove('opacity-100');
-
-                    // Show Budget box with a slight fade-in
-                    budgetBox.classList.remove('hidden');
-                    setTimeout(() => {
-                        budgetBox.classList.remove('opacity-0');
-                        budgetBox.classList.add('opacity-100');
-                    }, 50);
-
-                } else {
-                    // Restore rings and text
-                    svgContainer.classList.remove('opacity-30', 'scale-95');
-                    tapText.innerText = "[ TAP RINGS ]";
-
-                    // Hide Budget box
-                    budgetBox.classList.add('opacity-0');
-                    budgetBox.classList.remove('opacity-100');
-                    
-                    // Wait for fade out, then hide it and show TAM/SAM list
-                    setTimeout(() => {
-                        budgetBox.classList.add('hidden');
-                        dataMap.classList.remove('hidden');
-                        setTimeout(() => dataMap.classList.add('opacity-100'), 50);
-                    }, 300);
-                }
-            }
-
-            // Attach event listeners explicitly (prevents mobile Safari bugs)
-            svgTrigger.addEventListener('click', toggleBudget);
-            closeBtn.addEventListener('click', toggleBudget);
         });
+
+        // 2. Mobile-safe click logic using explicit display toggling
+        function toggleBudget() {
+            const svgContainer = document.getElementById('svg-trigger');
+            const dataMap = document.getElementById('data-map-container');
+            const budgetBox = document.getElementById('budget-container');
+            const tapText = document.getElementById('tap-text');
+
+            if (budgetBox.style.display === 'none') {
+                // Show Budget
+                budgetBox.style.display = 'block';
+                dataMap.style.display = 'none';
+                
+                // Dim SVG
+                svgContainer.style.opacity = '0.3';
+                svgContainer.style.transform = 'scale(0.95)';
+                tapText.innerText = "[ CLOSE ]";
+            } else {
+                // Show Data Map
+                budgetBox.style.display = 'none';
+                dataMap.style.display = 'block';
+                
+                // Restore SVG
+                svgContainer.style.opacity = '1';
+                svgContainer.style.transform = 'scale(1)';
+                tapText.innerText = "[ TAP TO REVEAL ]";
+            }
+        }
     </script>
 </body>
 </html>
