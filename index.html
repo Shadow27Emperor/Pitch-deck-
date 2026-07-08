@@ -7,7 +7,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         body { font-family: 'Inter', sans-serif; background-color: #000000; color: #d4d4d8; }
@@ -147,25 +147,25 @@
     <section id="rings-section" class="py-16 md:py-24 px-4 md:px-6 border-t border-zinc-900 bg-black">
         <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center min-h-[400px]">
             
-            <div id="svg-container" class="relative flex justify-center items-center w-full max-w-[400px] mx-auto aspect-square cursor-pointer transition-all duration-500 ease-in-out group" onclick="toggleBudget()">
+            <div id="svg-trigger" class="relative flex justify-center items-center w-full max-w-[400px] mx-auto aspect-square cursor-pointer transition-all duration-500 ease-in-out group">
                 <svg viewBox="0 0 400 400" class="w-full h-auto">
                     <g transform="rotate(-90 200 200)">
                         <circle cx="200" cy="200" r="160" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="160" fill="none" stroke="#60a5fa" stroke-width="3" data-percentage="100" stroke-dasharray="1005.3" stroke-dashoffset="1005.3"></circle>
+                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="160" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" data-percentage="100" stroke-dasharray="1005.3" stroke-dashoffset="1005.3"></circle>
 
                         <circle cx="200" cy="200" r="120" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="120" fill="none" stroke="#f97316" stroke-width="3" data-percentage="80" stroke-dasharray="754" stroke-dashoffset="754"></circle>
+                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="120" fill="none" stroke="#f97316" stroke-width="3" stroke-linecap="round" data-percentage="80" stroke-dasharray="754" stroke-dashoffset="754"></circle>
 
                         <circle cx="200" cy="200" r="80" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="80" fill="none" stroke="#22c55e" stroke-width="3" data-percentage="40" stroke-dasharray="502.7" stroke-dashoffset="502.7"></circle>
+                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="80" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" data-percentage="40" stroke-dasharray="502.7" stroke-dashoffset="502.7"></circle>
 
                         <circle cx="200" cy="200" r="40" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="40" fill="none" stroke="#3b82f6" stroke-width="3" data-percentage="10" stroke-dasharray="251.3" stroke-dashoffset="251.3"></circle>
+                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="40" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" data-percentage="10" stroke-dasharray="251.3" stroke-dashoffset="251.3"></circle>
                     </g>
                 </svg>
                 <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
                     <span id="data-map-text" class="font-mono text-[10px] md:text-xs text-zinc-600 opacity-0 transition-opacity duration-1000 tracking-widest">DATA MAP</span>
-                    <span id="tap-text" class="font-mono text-[9px] md:text-[10px] text-zinc-700 mt-2 opacity-0 transition-opacity duration-1000 delay-500 group-hover:text-white">[ TAP RINGS ]</span>
+                    <span id="tap-text" class="font-mono text-[9px] md:text-[10px] text-zinc-700 mt-2 opacity-0 transition-opacity duration-1000 delay-500 group-hover:text-white border border-zinc-800 px-3 py-1 rounded-full">[ TAP RINGS ]</span>
                 </div>
             </div>
 
@@ -181,53 +181,53 @@
                     <div class="flex items-center gap-3 md:gap-4">
                         <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#f97316] shrink-0"></div>
                         <span class="text-zinc-500 w-24 md:w-32 shrink-0">India TAM:</span>
-                        <span class="text-white font-bold shrink-0">₹800 Crore</span>
+                        <span class="text-white font-bold shrink-0">$100M+</span>
                         <span class="text-zinc-700 hidden md:inline ml-2">(15k+ clinics, 32M+ pets)</span>
                     </div>
                     <div class="flex items-center gap-3 md:gap-4">
                         <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#22c55e] shrink-0"></div>
                         <span class="text-zinc-500 w-24 md:w-32 shrink-0">Urban SAM:</span>
-                        <span class="text-white font-bold shrink-0">₹300 Crore</span>
+                        <span class="text-white font-bold shrink-0">$35M</span>
                         <span class="text-zinc-700 hidden md:inline ml-2">(~5,000 Tier 1 & 2)</span>
                     </div>
                     <div class="flex items-center gap-3 md:gap-4 border-l-2 border-blue-900 pl-3 md:pl-4 py-2 bg-[#050505] -ml-3 md:-ml-4">
                         <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#3b82f6] shrink-0"></div>
                         <span class="text-blue-500 w-24 md:w-32 font-bold shrink-0">18-Mo Goal:</span>
-                        <span class="text-white font-bold">300 Clinics = ₹3 Cr ARR</span>
+                        <span class="text-white font-bold">300 Clinics = $350k ARR</span>
                     </div>
                 </div>
 
                 <div id="budget-container" class="hidden opacity-0 transition-opacity duration-300">
                     <div class="bg-black border border-zinc-800 rounded-lg p-6 md:p-8 relative">
-                        <button onclick="toggleBudget(event)" class="absolute top-4 right-4 text-zinc-600 hover:text-white font-mono text-xs">[ CLOSE ]</button>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-4 md:mb-6 border-b border-zinc-900 pb-3 md:pb-4 pr-16">Raising a $25,000 (₹20L) Micro-Seed</h3>
+                        <button id="close-budget-btn" class="absolute top-4 right-4 text-zinc-600 hover:text-white font-mono text-xs">[ X ]</button>
+                        <h3 class="text-lg md:text-xl font-bold text-white mb-4 md:mb-6 border-b border-zinc-900 pb-3 md:pb-4 pr-16">Raising a $25,000 Micro-Seed</h3>
                         
                         <div class="space-y-5 md:space-y-6">
                             <div>
                                 <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
                                     <span class="text-white font-bold">50% Decentralized Sales Engine</span>
-                                    <span class="text-zinc-600">₹10L</span>
+                                    <span class="text-zinc-600">$12,500</span>
                                 </div>
                                 <p class="text-zinc-500 text-xs md:text-sm">Zero CAC. Sponsoring hustle/finance influencers. They send audiences to local clinics, and I pay out a 20% commission only when a clinic officially signs up.</p>
                             </div>
                             <div>
                                 <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
                                     <span class="text-white font-bold">25% Founder Runway</span>
-                                    <span class="text-zinc-600">₹5L</span>
+                                    <span class="text-zinc-600">$6,250</span>
                                 </div>
                                 <p class="text-zinc-500 text-xs md:text-sm">12-18 months of absolute focus. Covers living expenses in Maharashtra and a small hardware upgrade to maximize deployment speed.</p>
                             </div>
                             <div>
                                 <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
                                     <span class="text-white font-bold">15% Legal & Payouts</span>
-                                    <span class="text-zinc-600">₹3L</span>
+                                    <span class="text-zinc-600">$3,750</span>
                                 </div>
                                 <p class="text-zinc-500 text-xs md:text-sm">Bulletproof B2B data privacy terms, company incorporation, and the financial architecture to seamlessly pay the influencer army.</p>
                             </div>
                             <div>
                                 <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
                                     <span class="text-white font-bold">10% Infrastructure</span>
-                                    <span class="text-zinc-600">₹2L</span>
+                                    <span class="text-zinc-600">$2,500</span>
                                 </div>
                                 <p class="text-zinc-500 text-xs md:text-sm">OpenAI/Anthropic API scaling, and Google Play Console native launch fees.</p>
                             </div>
@@ -243,7 +243,7 @@
         <div class="max-w-2xl mx-auto">
             <h2 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">The backend engine is ready.</h2>
             <p class="text-sm md:text-base text-zinc-500 mb-8 md:mb-10">
-                Raising $2500 to scale the infrastructure and launch the influencer B2B sales army.
+                Raising $25,000 to scale the infrastructure and launch the influencer B2B sales army.
             </p>
             <a href="mailto:abdulaaga09@gmail.com" class="inline-block bg-white text-black font-mono font-bold text-xs md:text-sm px-8 md:px-10 py-3 md:py-4 rounded hover:bg-zinc-300 transition-colors w-full md:w-auto">
                 LET'S TALK
@@ -252,8 +252,8 @@
     </section>
 
     <script>
-        // Scroll Observer for the SVG Sweep
         document.addEventListener("DOMContentLoaded", () => {
+            // 1. Scroll Observer for SVG Sweep Animation
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -277,53 +277,59 @@
 
             const ringsSection = document.getElementById('rings-section');
             if (ringsSection) observer.observe(ringsSection);
-        });
 
-        // Toggle logic for the "Tap to Reveal Budget" Interaction
-        let isBudgetVisible = false;
-        function toggleBudget(e) {
-            if(e) e.stopPropagation(); // Prevent double triggers if clicking the close button
+            // 2. Mobile-safe click listener for the Tap Interaction
+            let isBudgetVisible = false;
+            const svgTrigger = document.getElementById('svg-trigger');
+            const closeBtn = document.getElementById('close-budget-btn');
             
-            isBudgetVisible = !isBudgetVisible;
+            function toggleBudget(e) {
+                if(e) e.stopPropagation(); 
+                isBudgetVisible = !isBudgetVisible;
 
-            const svgContainer = document.getElementById('svg-container');
-            const dataMap = document.getElementById('data-map-container');
-            const budgetBox = document.getElementById('budget-container');
-            const tapText = document.getElementById('tap-text');
+                const svgContainer = document.getElementById('svg-trigger');
+                const dataMap = document.getElementById('data-map-container');
+                const budgetBox = document.getElementById('budget-container');
+                const tapText = document.getElementById('tap-text');
 
-            if (isBudgetVisible) {
-                // 1. Dim rings and change prompt text
-                svgContainer.classList.add('opacity-30', 'scale-95');
-                tapText.innerText = "[ CLOSE ]";
+                if (isBudgetVisible) {
+                    // Dim rings and change prompt text
+                    svgContainer.classList.add('opacity-30', 'scale-95');
+                    tapText.innerText = "[ CLOSE ]";
 
-                // 2. Hide TAM/SAM list immediately
-                dataMap.classList.add('hidden');
-                dataMap.classList.remove('opacity-100');
+                    // Hide TAM/SAM list immediately
+                    dataMap.classList.add('hidden');
+                    dataMap.classList.remove('opacity-100');
 
-                // 3. Show Budget box with a slight fade-in
-                budgetBox.classList.remove('hidden');
-                setTimeout(() => {
-                    budgetBox.classList.remove('opacity-0');
-                    budgetBox.classList.add('opacity-100');
-                }, 50);
+                    // Show Budget box with a slight fade-in
+                    budgetBox.classList.remove('hidden');
+                    setTimeout(() => {
+                        budgetBox.classList.remove('opacity-0');
+                        budgetBox.classList.add('opacity-100');
+                    }, 50);
 
-            } else {
-                // 1. Restore rings and text
-                svgContainer.classList.remove('opacity-30', 'scale-95');
-                tapText.innerText = "[ TAP RINGS ]";
+                } else {
+                    // Restore rings and text
+                    svgContainer.classList.remove('opacity-30', 'scale-95');
+                    tapText.innerText = "[ TAP RINGS ]";
 
-                // 2. Hide Budget box
-                budgetBox.classList.add('opacity-0');
-                budgetBox.classList.remove('opacity-100');
-                
-                // 3. Wait for fade out, then hide it and show TAM/SAM list
-                setTimeout(() => {
-                    budgetBox.classList.add('hidden');
-                    dataMap.classList.remove('hidden');
-                    setTimeout(() => dataMap.classList.add('opacity-100'), 50);
-                }, 300);
+                    // Hide Budget box
+                    budgetBox.classList.add('opacity-0');
+                    budgetBox.classList.remove('opacity-100');
+                    
+                    // Wait for fade out, then hide it and show TAM/SAM list
+                    setTimeout(() => {
+                        budgetBox.classList.add('hidden');
+                        dataMap.classList.remove('hidden');
+                        setTimeout(() => dataMap.classList.add('opacity-100'), 50);
+                    }, 300);
+                }
             }
-        }
+
+            // Attach event listeners explicitly (prevents mobile Safari bugs)
+            svgTrigger.addEventListener('click', toggleBudget);
+            closeBtn.addEventListener('click', toggleBudget);
+        });
     </script>
 </body>
 </html>
