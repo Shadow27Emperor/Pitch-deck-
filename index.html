@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,235 +8,335 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        apple: {
+                            bg: '#000000',
+                            card: '#1c1c1e',
+                            border: '#2c2c2e',
+                            text: '#f5f5f7',
+                            muted: '#86868b',
+                            blue: '#0a84ff',
+                            green: '#30d158',
+                            orange: '#ff9f0a',
+                            red: '#ff453a',
+                            /* Custom Deep Tints for Cards */
+                            darkRed: '#1c0b0b',
+                            borderRed: '#381515',
+                            darkGreen: '#0b1c10',
+                            borderGreen: '#15381a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'San Francisco', 'Segoe UI', 'Roboto', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
     
     <style>
-        body { font-family: 'Inter', sans-serif; background-color: #000000; color: #d4d4d8; }
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        ::selection { background-color: rgba(59, 130, 246, 0.3); color: white; }
+        body { 
+            background-color: #000000; 
+            color: #f5f5f7; 
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        ::selection { background-color: rgba(10, 132, 255, 0.3); color: white; }
 
-        /* Scroll Animations */
-        .fade-in-up { animation: fadeInUp 1s ease-out forwards; opacity: 0; }
-        .delay-1 { animation-delay: 0.2s; }
+        /* Smooth Apple-like reveal animations */
+        .fade-in-down { animation: fadeInDown 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .fade-in-up { animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
         
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes quickFade {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            from { opacity: 0; transform: scale(0.98); }
+            to { opacity: 1; transform: scale(1); }
         }
-        .animate-quick-fade { animation: quickFade 0.3s ease-out forwards; }
+        .animate-quick-fade { animation: quickFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+        /* Hide scrollbar for clean aesthetic */
+        ::-webkit-scrollbar { width: 0px; background: transparent; }
     </style>
 </head>
-<body class="overflow-x-hidden bg-black">
+<body class="overflow-x-hidden">
 
-    <section class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative border-b border-zinc-900">
-        <div class="max-w-4xl fade-in-up w-full">
-            <h1 class="text-4xl md:text-7xl font-bold tracking-tight text-white mb-4">
+    <!-- Hero Section -->
+    <section class="min-h-screen flex flex-col justify-center items-center text-center p-6 relative">
+        <div class="max-w-4xl fade-in-up w-full z-10 pt-20">
+            <h1 class="text-5xl md:text-8xl font-bold tracking-tight text-apple-text mb-6">
                 Veterinary care is broken.
             </h1>
-            <h2 class="text-2xl md:text-5xl text-zinc-600 font-semibold mb-16">
+            <h2 class="text-2xl md:text-5xl text-apple-muted font-semibold tracking-tight">
                 We are fixing the handoff.
             </h2>
         </div>
         
-        <div class="absolute bottom-12 left-12 text-zinc-600 font-mono text-xs md:text-sm hidden md:block">
-            &gt; Built by a 16-year-old solo dev in Maharashtra, India.
-        </div>
-        
-        <div class="absolute bottom-12 left-1/2 transform -translate-x-1/2 animate-pulse text-zinc-700">
-            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-            </svg>
+        <div class="absolute bottom-10 left-10 text-apple-muted font-mono text-sm hidden md:block opacity-60">
+            // Built by a 16-year-old solo dev in Maharashtra.
         </div>
     </section>
 
-    <section class="py-16 md:py-24 px-4 md:px-6 max-w-3xl mx-auto fade-in-up delay-1">
-        <div class="bg-black border border-zinc-800 rounded-lg p-5 md:p-6 font-mono text-xs md:text-sm shadow-2xl">
-            <div class="flex items-center gap-2 mb-4 md:mb-6 border-b border-zinc-900 pb-3 md:pb-4">
-                <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-zinc-700"></div>
-                <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-zinc-700"></div>
-                <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-zinc-700"></div>
-                <span class="text-zinc-600 ml-2">founder_memo.sh</span>
-            </div>
-            <p class="text-zinc-400 leading-relaxed">
-                <span class="text-white font-bold"># Full transparency:</span><br><br>
-                My frontend is broken today, so instead of a flashy UI video, I am pitching you the raw B2B2C math and zero-server backend architecture. 
-                <br><br>
-                I decided to pitch this to someone who actually understands early-stage leverage rather than waiting for perfect CSS.
-            </p>
-        </div>
-    </section>
-
-    <section class="py-16 md:py-24 px-4 md:px-6 max-w-6xl mx-auto border-t border-zinc-900">
-        <div class="grid md:grid-cols-2 gap-0 border border-zinc-900 rounded-lg overflow-hidden">
-            <div class="p-6 md:p-10 border-b md:border-b-0 md:border-r border-zinc-900 bg-black relative">
-                <div class="absolute left-0 top-0 bottom-0 w-1 bg-red-500/80"></div>
-                <h3 class="text-xs md:text-sm font-mono text-red-400 mb-4 md:mb-6 uppercase tracking-widest">01. The Problem</h3>
-                <p class="text-lg md:text-xl text-zinc-300 leading-relaxed font-medium">
-                    Vets are burned out from typing medical files for 12 hours a day. Pet owners leave the clinic stressed, forget the vet's exact instructions, and guess on critical medication dosages at home.
+    <!-- Problem / Solution Cards (Tinted Backgrounds) -->
+    <section class="py-12 md:py-24 px-4 md:px-8 max-w-7xl mx-auto fade-in-up delay-1">
+        <div class="grid md:grid-cols-2 gap-6 md:gap-8">
+            <!-- Problem Card (Dark Red) -->
+            <div class="bg-apple-darkRed border-[3px] border-apple-borderRed rounded-[2rem] p-8 md:p-12 transition-transform hover:scale-[1.01] duration-300">
+                <div class="w-12 h-12 rounded-full bg-apple-red/20 flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-apple-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold text-apple-text mb-4">The Problem</h3>
+                <p class="text-lg text-apple-muted leading-relaxed font-medium">
+                    Vets are burned out from typing medical files for 12 hours a day. Pet owners leave the clinic stressed, forget instructions, and guess on critical medication dosages at home.
                 </p>
             </div>
-            <div class="p-6 md:p-10 bg-black relative">
-                <div class="absolute left-0 top-0 bottom-0 w-1 bg-green-500/80"></div>
-                <h3 class="text-xs md:text-sm font-mono text-green-400 mb-4 md:mb-6 uppercase tracking-widest">02. The Solution (AI Intake Bridge)</h3>
-                <ul class="text-base md:text-lg text-zinc-400 space-y-4">
-                    <li class="flex gap-3 md:gap-4"><span class="text-white font-mono">1.</span> The vet speaks normally into the app for 60 seconds.</li>
-                    <li class="flex gap-3 md:gap-4"><span class="text-white font-mono">2.</span> The AI instantly structures a clinical report for the vet.</li>
-                    <li class="flex gap-3 md:gap-4"><span class="text-white font-mono">3.</span> The AI dynamically generates a foolproof, 2D drum-wheel Daily Care UI strictly based on the diagnosis for the owner.</li>
+            
+            <!-- Solution Card (Dark Green) -->
+            <div class="bg-apple-darkGreen border-[3px] border-apple-borderGreen rounded-[2rem] p-8 md:p-12 transition-transform hover:scale-[1.01] duration-300">
+                <div class="w-12 h-12 rounded-full bg-apple-green/20 flex items-center justify-center mb-6">
+                    <svg class="w-6 h-6 text-apple-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold text-apple-text mb-6">The AI Intake Bridge</h3>
+                <ul class="text-lg text-apple-muted space-y-5">
+                    <li class="flex gap-4 items-start"><span class="bg-[#0b1c10] text-apple-green px-3 py-1 rounded-lg font-mono text-sm border-2 border-apple-borderGreen shrink-0">1</span> <span>The vet speaks normally into the app for 60 seconds.</span></li>
+                    <li class="flex gap-4 items-start"><span class="bg-[#0b1c10] text-apple-green px-3 py-1 rounded-lg font-mono text-sm border-2 border-apple-borderGreen shrink-0">2</span> <span>AI instantly structures a clinical report for the vet.</span></li>
+                    <li class="flex gap-4 items-start"><span class="bg-[#0b1c10] text-apple-green px-3 py-1 rounded-lg font-mono text-sm border-2 border-apple-borderGreen shrink-0">3</span> <span>AI generates a foolproof, 2D drum-wheel daily care UI for the owner.</span></li>
                 </ul>
             </div>
         </div>
     </section>
 
-    <section class="py-16 md:py-24 px-4 md:px-6 bg-black border-y border-zinc-900 text-center">
+    <!-- Zero Server Architecture -->
+    <section class="py-16 md:py-24 px-4 md:px-8 text-center fade-in-up delay-2">
         <div class="max-w-5xl mx-auto">
-            <h2 class="text-2xl md:text-3xl font-bold text-white mb-10 md:mb-16">The Moat: Zero-Server Architecture</h2>
+            <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-apple-text mb-16">Zero-Server Architecture.</h2>
             
-            <div class="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 font-mono text-xs md:text-sm mb-10 md:mb-12">
-                <div class="bg-black border border-zinc-800 text-zinc-300 py-3 md:py-4 px-4 md:px-6 rounded w-full md:w-auto">Vet dictates locally</div>
-                <div class="text-zinc-700 hidden md:block">──────&gt;</div>
-                <div class="text-zinc-700 md:hidden py-1">|</div>
-                <div class="bg-black border border-zinc-800 text-zinc-300 py-3 md:py-4 px-4 md:px-6 rounded w-full md:w-auto">Owner pays & scans QR</div>
-                <div class="text-zinc-700 hidden md:block">──────&gt;</div>
-                <div class="text-zinc-700 md:hidden py-1">|</div>
-                <div class="bg-black border border-green-900 text-green-400 py-3 md:py-4 px-4 md:px-6 rounded w-full md:w-auto">Trigger Server Upload</div>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 font-semibold text-sm md:text-base mb-12">
+                <div class="bg-apple-card border-[3px] border-apple-border text-apple-text py-5 px-8 rounded-full w-full md:w-auto shadow-lg">1. Vet dictates locally</div>
+                <div class="text-apple-border hidden md:block">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+                <div class="text-apple-border md:hidden rotate-90">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+                <div class="bg-apple-card border-[3px] border-apple-border text-apple-text py-5 px-8 rounded-full w-full md:w-auto shadow-lg">2. Owner pays & scans QR</div>
+                <div class="text-apple-border hidden md:block">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+                <div class="text-apple-border md:hidden rotate-90">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </div>
+                <div class="bg-apple-blue/10 border-[3px] border-apple-blue text-apple-blue py-5 px-8 rounded-full w-full md:w-auto shadow-lg">3. Trigger API Upload</div>
             </div>
 
-            <div class="inline-block bg-black border border-zinc-800 p-4 md:p-6 rounded-lg text-left w-full md:w-auto">
-                <p class="font-mono text-xs md:text-sm text-zinc-400">
-                    <span class="text-white">System.Log:</span> No payment = No QR scan = No API trigger. 
-                    <br><span class="text-blue-400 mt-2 block">Zero wasted compute costs on free users.</span>
+            <p class="font-mono text-sm text-apple-muted bg-apple-card border-[3px] border-apple-border inline-block p-6 rounded-2xl max-w-2xl text-left md:text-center">
+                No payment = No QR scan = No API trigger. <br class="hidden md:block">
+                <span class="text-apple-text mt-2 block font-semibold">Zero wasted compute costs on free users.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- Unit Economics -->
+    <section class="py-16 md:py-24 px-4 md:px-8 max-w-6xl mx-auto">
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-apple-text mb-12">The Math Makes Sense.</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+            <div class="bg-apple-card border-[3px] border-apple-border p-8 md:p-12 rounded-[2rem]">
+                <h4 class="text-sm font-semibold text-apple-muted mb-8 uppercase tracking-widest">The Setup</h4>
+                <div class="mb-8">
+                    <span class="text-apple-muted block mb-2 font-medium">Starter SaaS Fee</span>
+                    <span class="text-4xl md:text-5xl font-bold text-apple-text tracking-tight">₹2,599<span class="text-xl md:text-2xl text-apple-muted font-medium">/mo</span></span>
+                </div>
+                <div>
+                    <span class="text-apple-muted block mb-2 font-medium">Owner Digital Tracker Upsell</span>
+                    <span class="text-4xl md:text-5xl font-bold text-apple-text tracking-tight">₹200<span class="text-xl md:text-2xl text-apple-muted font-medium">/scan</span></span>
+                </div>
+            </div>
+
+            <div class="bg-apple-card border-[3px] border-apple-blue p-8 md:p-12 rounded-[2rem] relative overflow-hidden flex flex-col justify-center">
+                <div class="absolute top-0 right-0 p-8 opacity-10">
+                    <svg class="w-32 h-32 text-apple-blue" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+                </div>
+                <h4 class="text-sm font-semibold text-apple-blue mb-4 uppercase tracking-widest">Break-Even Point</h4>
+                <p class="text-6xl md:text-7xl font-bold text-apple-text tracking-tight mb-4">13</p>
+                <p class="text-lg text-apple-muted leading-relaxed font-medium">
+                    Owners. That is all a clinic needs in an entire month to break even on the software. <strong class="text-apple-text">Less than 1 person every two days.</strong>
                 </p>
             </div>
         </div>
+
+        <div class="bg-[#0b1c10] border-[3px] border-apple-borderGreen p-8 md:p-12 rounded-[2rem] flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+            <div class="max-w-2xl">
+                <h4 class="text-sm font-semibold text-apple-green mb-4 uppercase tracking-widest">Estimated Profit (At 3 scans/day)</h4>
+                <p class="text-lg text-apple-muted leading-relaxed font-medium">
+                    Even with terrible foot traffic, converting just 3 people a day (90/month) generates ₹18,000 for the clinic. Minus the ₹2,599 fee, they net pure passive profit.
+                </p>
+            </div>
+            <div class="text-left md:text-right shrink-0">
+                <span class="block text-5xl md:text-6xl font-bold text-apple-green tracking-tight mb-2">₹15,400+</span>
+                <span class="text-apple-muted font-medium">Net Profit / Month</span>
+            </div>
+        </div>
     </section>
 
-    <section class="py-16 md:py-24 px-4 md:px-6 max-w-5xl mx-auto">
-        <h2 class="text-2xl md:text-3xl font-bold text-white mb-8 md:mb-12">Unit Economics <br class="md:hidden"><span class="text-zinc-600 text-lg md:text-xl font-normal md:ml-2">(The "No-Brainer" Worst-Case Math)</span></h2>
+    <!-- 2-Year Timeline -->
+    <section class="py-16 md:py-24 px-4 md:px-8 max-w-6xl mx-auto border-t border-apple-border">
+        <h2 class="text-3xl md:text-5xl font-bold tracking-tight text-apple-text mb-16 text-center md:text-left">2-Year Execution Plan.</h2>
         
-        <div class="grid md:grid-cols-2 gap-4 md:gap-6 mb-4 md:mb-6">
-            <div class="bg-black border border-zinc-800 p-6 md:p-8 rounded-lg">
-                <h4 class="text-xs md:text-sm font-mono text-zinc-500 mb-4 md:mb-6 uppercase">The Setup</h4>
-                <div class="mb-4">
-                    <span class="text-zinc-500 block mb-1 text-sm md:text-base">Starter SaaS Fee</span>
-                    <span class="text-2xl md:text-3xl font-bold text-white font-mono">₹2,599<span class="text-sm md:text-lg text-zinc-600">/mo</span></span>
-                </div>
-                <div>
-                    <span class="text-zinc-500 block mb-1 text-sm md:text-base">Owner Digital Tracker Upsell</span>
-                    <span class="text-2xl md:text-3xl font-bold text-white font-mono">₹200<span class="text-sm md:text-lg text-zinc-600">/scan</span></span>
-                </div>
+        <div class="grid md:grid-cols-3 gap-6 relative">
+            <!-- Connecting line for desktop -->
+            <div class="hidden md:block absolute top-[4.5rem] left-8 right-8 h-[3px] bg-apple-border -z-10 rounded-full"></div>
+            
+            <!-- Phase 1 -->
+            <div class="bg-apple-bg md:bg-transparent relative p-6 md:p-0 border-l-[3px] md:border-l-0 border-apple-border md:border-none ml-4 md:ml-0">
+                <div class="absolute md:static -left-[1.25rem] md:-left-0 top-6 md:top-0 w-8 h-8 md:w-12 md:h-12 bg-apple-blue text-white rounded-full flex items-center justify-center font-bold shadow-[0_0_0_8px_#000000] mb-6 border-[3px] border-[#000]">1</div>
+                <h3 class="text-2xl font-bold text-apple-text mb-3">Q1-Q2 2024</h3>
+                <h4 class="text-apple-blue font-semibold mb-4 text-lg">Pilot Launch</h4>
+                <p class="text-apple-muted font-medium">Onboarding 30-40 targeted clinics in Maharashtra. Distributing dedicated Android tablets to remove all initial hardware friction and nail the 60-second voice intake workflow.</p>
             </div>
 
-            <div class="bg-[#050505] border border-blue-900/40 p-6 md:p-8 rounded-lg relative overflow-hidden">
-                <h4 class="text-xs md:text-sm font-mono text-blue-400 mb-4 md:mb-6 uppercase">The Break-Even</h4>
-                <p class="text-4xl md:text-5xl font-bold text-white font-mono mb-2">13 Owners</p>
-                <p class="text-sm md:text-base text-zinc-400">For the clinic to completely break even on your software, they only need 13 pet owners an entire month to pay the ₹200 fee. <strong class="text-zinc-300">That is less than 1 person every two days.</strong></p>
+            <!-- Phase 2 -->
+            <div class="bg-apple-bg md:bg-transparent relative p-6 md:p-0 border-l-[3px] md:border-l-0 border-apple-border md:border-none ml-4 md:ml-0">
+                <div class="absolute md:static -left-[1.25rem] md:-left-0 top-6 md:top-0 w-8 h-8 md:w-12 md:h-12 bg-apple-orange text-white rounded-full flex items-center justify-center font-bold shadow-[0_0_0_8px_#000000] mb-6 border-[3px] border-[#000]">2</div>
+                <h3 class="text-2xl font-bold text-apple-text mb-3">Q3-Q4 2024</h3>
+                <h4 class="text-apple-orange font-semibold mb-4 text-lg">B2B Distribution Engine</h4>
+                <p class="text-apple-muted font-medium">Scaling the Zero Upfront CAC influencer model. Deploying performance-based bounties to rapidly acquire a network of 150+ actively paying clinics.</p>
             </div>
-        </div>
 
-        <div class="bg-[#050505] border border-green-900/40 p-6 md:p-8 rounded-lg flex flex-col md:flex-row justify-between items-start md:items-center gap-4 md:gap-6">
-            <div>
-                <h4 class="text-xs md:text-sm font-mono text-green-400 mb-2 uppercase">The Profit (At just 3 scans a day)</h4>
-                <p class="text-sm md:text-base text-zinc-400 max-w-xl">Even with terrible foot traffic, if they convert just 3 people a day (90/month), the clinic generates ₹18,000. Minus your ₹2,599 fee, they net pure, passive profit.</p>
-            </div>
-            <div class="text-left md:text-right mt-4 md:mt-0">
-                <span class="block text-3xl md:text-4xl font-bold text-green-400 font-mono">₹15,400+</span>
-                <span class="text-zinc-600 font-mono text-xs md:text-sm">Net Profit / Month</span>
+            <!-- Phase 3 -->
+            <div class="bg-apple-bg md:bg-transparent relative p-6 md:p-0 border-l-[3px] md:border-l-0 border-apple-border md:border-none ml-4 md:ml-0">
+                <div class="absolute md:static -left-[1.25rem] md:-left-0 top-6 md:top-0 w-8 h-8 md:w-12 md:h-12 bg-apple-green text-white rounded-full flex items-center justify-center font-bold shadow-[0_0_0_8px_#000000] mb-6 border-[3px] border-[#000]">3</div>
+                <h3 class="text-2xl font-bold text-apple-text mb-3">2025 (Year 2)</h3>
+                <h4 class="text-apple-green font-semibold mb-4 text-lg">Series A & Scale</h4>
+                <p class="text-apple-muted font-medium">Pan-India rollout targeting 300+ Tier 1 & 2 urban clinics. Securing $350k+ ARR run rate to transition from pilot seed to a full priced equity round.</p>
             </div>
         </div>
     </section>
 
-    <section id="rings-section" class="py-16 md:py-24 px-4 md:px-6 border-t border-zinc-900 bg-black">
-        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 md:gap-16 items-center min-h-[400px]">
+    <!-- Data Rings & Ask -->
+    <section id="rings-section" class="py-16 md:py-32 px-4 md:px-8 border-t border-apple-border">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center min-h-[450px]">
             
-            <button type="button" id="svg-trigger" onclick="toggleBudget()" class="w-full max-w-[400px] mx-auto aspect-square relative appearance-none focus:outline-none bg-transparent border-none p-0 cursor-pointer transition-all duration-500 ease-in-out">
-                
-                <svg viewBox="0 0 400 400" class="w-full h-auto">
+            <!-- Interactive SVG Ring -->
+            <button type="button" id="svg-trigger" onclick="toggleBudget()" class="w-full max-w-[450px] mx-auto aspect-square relative appearance-none focus:outline-none bg-transparent border-none p-0 cursor-pointer transition-all duration-500 ease-in-out group hover:scale-[1.02]">
+                <svg viewBox="0 0 400 400" class="w-full h-auto drop-shadow-2xl">
                     <g transform="rotate(-90 200 200)">
-                        <circle cx="200" cy="200" r="160" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="160" fill="none" stroke="#60a5fa" stroke-width="3" stroke-linecap="round" data-percentage="100" stroke-dasharray="1005.3" stroke-dashoffset="1005.3"></circle>
+                        <!-- Ring 1: Global TAM -->
+                        <circle cx="200" cy="200" r="160" fill="none" stroke="#2c2c2e" stroke-width="14"></circle>
+                        <circle class="data-ring transition-all duration-[2500ms] ease-out" cx="200" cy="200" r="160" fill="none" stroke="#0a84ff" stroke-width="14" stroke-linecap="round" data-percentage="100" stroke-dasharray="1005.3" stroke-dashoffset="1005.3"></circle>
 
-                        <circle cx="200" cy="200" r="120" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="120" fill="none" stroke="#f97316" stroke-width="3" stroke-linecap="round" data-percentage="80" stroke-dasharray="754" stroke-dashoffset="754"></circle>
+                        <!-- Ring 2: India TAM -->
+                        <circle cx="200" cy="200" r="125" fill="none" stroke="#2c2c2e" stroke-width="14"></circle>
+                        <circle class="data-ring transition-all duration-[2500ms] ease-out delay-[200ms]" cx="200" cy="200" r="125" fill="none" stroke="#ff9f0a" stroke-width="14" stroke-linecap="round" data-percentage="80" stroke-dasharray="785.4" stroke-dashoffset="785.4"></circle>
 
-                        <circle cx="200" cy="200" r="80" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="80" fill="none" stroke="#22c55e" stroke-width="3" stroke-linecap="round" data-percentage="40" stroke-dasharray="502.7" stroke-dashoffset="502.7"></circle>
+                        <!-- Ring 3: Urban SAM -->
+                        <circle cx="200" cy="200" r="90" fill="none" stroke="#2c2c2e" stroke-width="14"></circle>
+                        <circle class="data-ring transition-all duration-[2500ms] ease-out delay-[400ms]" cx="200" cy="200" r="90" fill="none" stroke="#30d158" stroke-width="14" stroke-linecap="round" data-percentage="40" stroke-dasharray="565.5" stroke-dashoffset="565.5"></circle>
 
-                        <circle cx="200" cy="200" r="40" fill="none" stroke="#18181b" stroke-width="3"></circle>
-                        <circle class="data-ring transition-all duration-[3000ms] ease-in-out" cx="200" cy="200" r="40" fill="none" stroke="#3b82f6" stroke-width="3" stroke-linecap="round" data-percentage="10" stroke-dasharray="251.3" stroke-dashoffset="251.3"></circle>
+                        <!-- Ring 4: 18-Mo Goal -->
+                        <circle cx="200" cy="200" r="55" fill="none" stroke="#2c2c2e" stroke-width="14"></circle>
+                        <circle class="data-ring transition-all duration-[2500ms] ease-out delay-[600ms]" cx="200" cy="200" r="55" fill="none" stroke="#ff453a" stroke-width="14" stroke-linecap="round" data-percentage="10" stroke-dasharray="345.6" stroke-dashoffset="345.6"></circle>
                     </g>
                 </svg>
                 
                 <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                    <span id="data-map-text" class="font-mono text-[10px] md:text-xs text-zinc-600 opacity-0 transition-opacity duration-1000 tracking-widest">DATA MAP</span>
-                    <span id="tap-text" class="font-mono text-[9px] md:text-[10px] text-zinc-500 mt-2 opacity-0 transition-opacity duration-1000 delay-500 border border-zinc-800 px-3 py-1 rounded-full">[ TAP TO REVEAL ]</span>
+                    <span id="data-map-text" class="font-semibold text-xs text-apple-muted opacity-0 transition-opacity duration-1000 tracking-[0.2em] uppercase">Data Map</span>
+                    <span id="tap-text" class="font-medium text-[10px] text-apple-text mt-3 opacity-0 transition-opacity duration-1000 delay-500 bg-apple-card border-[3px] border-apple-border px-4 py-2 rounded-full shadow-lg group-hover:bg-apple-border">Tap to reveal Ask</span>
                 </div>
             </button>
 
-            <div class="relative w-full">
-                <h2 class="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 text-center md:text-left">Market Sizing & The Ask</h2>
+            <!-- Scrollable Containers -->
+            <div class="relative w-full h-[400px]">
                 
-                <div id="data-map-container" class="space-y-4 mb-10 md:mb-12 font-mono text-xs md:text-sm animate-quick-fade" style="display: block;">
-                    <div class="flex items-center gap-3 md:gap-4">
-                        <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#60a5fa] shrink-0"></div>
-                        <span class="text-zinc-500 w-24 md:w-32 shrink-0">Global TAM:</span>
-                        <span class="text-white font-bold">$1.6B+</span>
-                    </div>
-                    <div class="flex items-center gap-3 md:gap-4">
-                        <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#f97316] shrink-0"></div>
-                        <span class="text-zinc-500 w-24 md:w-32 shrink-0">India TAM:</span>
-                        <span class="text-white font-bold shrink-0">$100M+</span>
-                        <span class="text-zinc-700 hidden md:inline ml-2">(15k+ clinics, 32M+ pets)</span>
-                    </div>
-                    <div class="flex items-center gap-3 md:gap-4">
-                        <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#22c55e] shrink-0"></div>
-                        <span class="text-zinc-500 w-24 md:w-32 shrink-0">Urban SAM:</span>
-                        <span class="text-white font-bold shrink-0">$35M</span>
-                        <span class="text-zinc-700 hidden md:inline ml-2">(~5,000 Tier 1 & 2)</span>
-                    </div>
-                    <div class="flex items-center gap-3 md:gap-4 border-l-2 border-blue-900 pl-3 md:pl-4 py-2 bg-[#050505] -ml-3 md:-ml-4">
-                        <div class="w-2.5 h-2.5 md:w-3 md:h-3 rounded-full bg-[#3b82f6] shrink-0"></div>
-                        <span class="text-blue-500 w-24 md:w-32 font-bold shrink-0">18-Mo Goal:</span>
-                        <span class="text-white font-bold">300 Clinics = $350k ARR</span>
+                <!-- State 1: Market Sizing -->
+                <div id="data-map-container" class="absolute inset-0 animate-quick-fade overflow-y-auto" style="display: flex; flex-direction: column;">
+                    <div class="my-auto py-6">
+                        <h2 class="text-3xl md:text-4xl font-bold text-apple-text mb-10 text-center md:text-left tracking-tight">Market Sizing.</h2>
+                        
+                        <div class="space-y-6 text-lg">
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 rounded-full bg-apple-blue shrink-0 shadow-[0_0_12px_rgba(10,132,255,0.5)]"></div>
+                                <span class="text-apple-muted w-32 shrink-0 font-medium">Global TAM:</span>
+                                <span class="text-apple-text font-bold">$1.6B+</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 rounded-full bg-apple-orange shrink-0 shadow-[0_0_12px_rgba(255,159,10,0.5)]"></div>
+                                <span class="text-apple-muted w-32 shrink-0 font-medium">India TAM:</span>
+                                <span class="text-apple-text font-bold shrink-0">$100M+</span>
+                                <span class="text-apple-muted hidden md:inline ml-2 text-sm">(15k+ clinics)</span>
+                            </div>
+                            <div class="flex items-center gap-4">
+                                <div class="w-4 h-4 rounded-full bg-apple-green shrink-0 shadow-[0_0_12px_rgba(48,209,88,0.5)]"></div>
+                                <span class="text-apple-muted w-32 shrink-0 font-medium">Urban SAM:</span>
+                                <span class="text-apple-text font-bold shrink-0">$35M</span>
+                                <span class="text-apple-muted hidden md:inline ml-2 text-sm">(~5,000 Tier 1 & 2)</span>
+                            </div>
+                            <div class="flex items-center gap-4 bg-apple-card border-[3px] border-apple-border p-4 rounded-2xl">
+                                <div class="w-4 h-4 rounded-full bg-apple-red shrink-0 shadow-[0_0_12px_rgba(255,69,58,0.5)]"></div>
+                                <span class="text-apple-red w-32 font-bold shrink-0">18-Mo Goal:</span>
+                                <span class="text-apple-text font-bold">300 Clinics = $350k ARR</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div id="budget-container" class="animate-quick-fade" style="display: none;">
-                    <div class="bg-black border border-zinc-800 rounded-lg p-6 md:p-8 relative">
-                        <button onclick="toggleBudget()" class="absolute top-4 right-4 text-zinc-600 hover:text-white font-mono text-xs">[ X ]</button>
-                        <h3 class="text-lg md:text-xl font-bold text-white mb-4 md:mb-6 border-b border-zinc-900 pb-3 md:pb-4 pr-16">Raising a $25,000 Micro-Seed</h3>
+                <!-- State 2: Budget Ask -->
+                <div id="budget-container" class="absolute inset-0 animate-quick-fade" style="display: none;">
+                    <div class="bg-apple-card border-[3px] border-apple-border rounded-[2rem] p-8 md:p-10 h-full relative overflow-y-auto flex flex-col">
+                        <button id="close-budget-btn" class="absolute top-6 right-6 w-8 h-8 flex items-center justify-center bg-apple-bg rounded-full text-apple-muted hover:text-white transition-colors border-[3px] border-apple-border z-10 shrink-0">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
                         
-                        <div class="space-y-5 md:space-y-6">
-                            <div>
-                                <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
-                                    <span class="text-white font-bold">50% Decentralized Sales Engine</span>
-                                    <span class="text-zinc-600">$12,500</span>
+                        <div class="my-auto pt-6">
+                            <h3 class="text-2xl font-bold text-apple-text mb-2 pr-12 tracking-tight">The $25,000 Pilot Fund</h3>
+                            <p class="text-apple-muted mb-8 font-medium">Scaling to a massive 30-clinic rollout.</p>
+                            
+                            <div class="space-y-6">
+                                <div>
+                                    <div class="flex justify-between font-semibold mb-1">
+                                        <span class="text-apple-text">The Offer</span>
+                                        <span class="text-apple-blue">SAFE or ROFR</span>
+                                    </div>
+                                    <p class="text-apple-muted text-sm leading-relaxed">Open to a standard SAFE or an Advisory stake with Right of First Refusal on the next priced round.</p>
                                 </div>
-                                <p class="text-zinc-500 text-xs md:text-sm">Zero CAC. Sponsoring hustle/finance influencers. They send audiences to local clinics, and I pay out a 20% commission only when a clinic officially signs up.</p>
-                            </div>
-                            <div>
-                                <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
-                                    <span class="text-white font-bold">25% Founder Runway</span>
-                                    <span class="text-zinc-600">$6,250</span>
+                                <div class="h-[2px] bg-apple-border w-full"></div>
+                                <div>
+                                    <div class="flex justify-between font-semibold mb-1">
+                                        <span class="text-apple-text">Pilot Hardware</span>
+                                        <span class="text-apple-muted">$10,000</span>
+                                    </div>
+                                    <p class="text-apple-muted text-sm leading-relaxed">30-40 dedicated Android tablets for free clinic deployment, removing all friction.</p>
                                 </div>
-                                <p class="text-zinc-500 text-xs md:text-sm">12-18 months of absolute focus. Covers living expenses in Maharashtra and a small hardware upgrade to maximize deployment speed.</p>
-                            </div>
-                            <div>
-                                <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
-                                    <span class="text-white font-bold">15% Legal & Payouts</span>
-                                    <span class="text-zinc-600">$3,750</span>
+                                <div class="h-[2px] bg-apple-border w-full"></div>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span class="text-apple-text font-semibold block mb-1">Distribution & CAC</span>
+                                        <p class="text-apple-muted text-sm">Bounties & Influencer model</p>
+                                    </div>
+                                    <span class="text-apple-muted font-semibold">$10,000</span>
                                 </div>
-                                <p class="text-zinc-500 text-xs md:text-sm">Bulletproof B2B data privacy terms, company incorporation, and the financial architecture to seamlessly pay the influencer army.</p>
-                            </div>
-                            <div>
-                                <div class="flex justify-between font-mono text-xs md:text-sm mb-1 md:mb-2">
-                                    <span class="text-white font-bold">10% Infrastructure</span>
-                                    <span class="text-zinc-600">$2,500</span>
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <span class="text-apple-text font-semibold block mb-1">Infrastructure & DB</span>
+                                        <p class="text-apple-muted text-sm">LLM Tokens & Vercel Scaling</p>
+                                    </div>
+                                    <span class="text-apple-muted font-semibold">$5,000</span>
                                 </div>
-                                <p class="text-zinc-500 text-xs md:text-sm">OpenAI/Anthropic API scaling, and Google Play Console native launch fees.</p>
                             </div>
                         </div>
                     </div>
@@ -245,22 +346,22 @@
         </div>
     </section>
 
-    <section class="py-16 md:py-24 px-4 md:px-6 border-t border-zinc-900 text-center bg-black">
+    <!-- Footer CTA -->
+    <section class="py-24 px-4 border-t border-apple-border text-center">
         <div class="max-w-2xl mx-auto">
-            <h2 class="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">The backend engine is ready.</h2>
-            <p class="text-sm md:text-base text-zinc-500 mb-8 md:mb-10">
-                Raising $25,000 to scale the infrastructure and launch the influencer B2B sales army.
+            <h2 class="text-3xl md:text-5xl font-bold text-apple-text tracking-tight mb-6">The backend engine is ready.</h2>
+            <p class="text-lg text-apple-muted mb-12 font-medium">
+                Seeking a mentor and a $25,000 investment to aggressively launch the B2B sales army.
             </p>
-            <a href="mailto:abdulaaga09@gmail.com" class="inline-block bg-white text-black font-mono font-bold text-xs md:text-sm px-8 md:px-10 py-3 md:py-4 rounded hover:bg-zinc-300 transition-colors w-full md:w-auto">
-                LET'S TALK
+            <a href="mailto:abdulaaga09@gmail.com" class="inline-flex items-center justify-center bg-apple-text text-apple-bg font-bold text-lg px-10 py-4 rounded-full hover:scale-105 transition-transform duration-300 w-full md:w-auto">
+                Abdulaaga09@gmail.com
             </a>
         </div>
     </section>
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            // 1. Scroll Observer for SVG Sweep Animation
-            // Lowered threshold to 0.1 so it fires instantly even on small mobile screens
+            // Scroll Observer for SVG Sweep Animation
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -280,39 +381,50 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.1 }); 
+            }, { threshold: 0.2 }); 
 
             const ringsSection = document.getElementById('rings-section');
             if (ringsSection) observer.observe(ringsSection);
-        });
 
-        // 2. Mobile-safe click logic using explicit display toggling
-        function toggleBudget() {
-            const svgContainer = document.getElementById('svg-trigger');
-            const dataMap = document.getElementById('data-map-container');
-            const budgetBox = document.getElementById('budget-container');
-            const tapText = document.getElementById('tap-text');
+            // Toggle Card State
+            const svgTrigger = document.getElementById('svg-trigger');
+            const closeBtn = document.getElementById('close-budget-btn');
+            
+            function toggleBudget(e) {
+                if(e) e.stopPropagation(); 
 
-            if (budgetBox.style.display === 'none') {
-                // Show Budget
-                budgetBox.style.display = 'block';
-                dataMap.style.display = 'none';
-                
-                // Dim SVG
-                svgContainer.style.opacity = '0.3';
-                svgContainer.style.transform = 'scale(0.95)';
-                tapText.innerText = "[ CLOSE ]";
-            } else {
-                // Show Data Map
-                budgetBox.style.display = 'none';
-                dataMap.style.display = 'block';
-                
-                // Restore SVG
-                svgContainer.style.opacity = '1';
-                svgContainer.style.transform = 'scale(1)';
-                tapText.innerText = "[ TAP TO REVEAL ]";
+                const svgContainer = document.getElementById('svg-trigger');
+                const dataMap = document.getElementById('data-map-container');
+                const budgetBox = document.getElementById('budget-container');
+                const tapText = document.getElementById('tap-text');
+
+                if (budgetBox.style.display === 'none') {
+                    // Show Budget
+                    budgetBox.style.display = 'flex';
+                    dataMap.style.display = 'none';
+                    
+                    // Dim SVG
+                    svgContainer.style.opacity = '0.2';
+                    svgContainer.style.transform = 'scale(0.95)';
+                    tapText.innerText = "Tap to revert";
+                } else {
+                    // Show Data Map
+                    budgetBox.style.display = 'none';
+                    dataMap.style.display = 'flex';
+                    
+                    // Restore SVG
+                    svgContainer.style.opacity = '1';
+                    svgContainer.style.transform = 'scale(1)';
+                    tapText.innerText = "Tap to reveal Ask";
+                }
             }
-        }
+
+            svgTrigger.addEventListener('click', toggleBudget);
+            closeBtn.addEventListener('click', toggleBudget);
+        });
     </script>
 </body>
 </html>
+
+
+```
